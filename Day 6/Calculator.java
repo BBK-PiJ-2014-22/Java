@@ -1,7 +1,7 @@
 public Calculator {
 	
 	void public add(int i1, int i2){
-		System.out.println(i1 + i2_;
+		System.out.println(i1 + i2);
 	}
 	
 	void public subtract(int i1, int i2){
