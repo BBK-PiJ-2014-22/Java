@@ -49,4 +49,4 @@ Temporary Items
 .project
 bin
 
-.class
+*.class
