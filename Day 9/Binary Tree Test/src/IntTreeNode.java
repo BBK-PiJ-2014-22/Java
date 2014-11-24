@@ -99,6 +99,7 @@ public class IntTreeNode {
 		
 	}
 	
+	//This needs further testing
 	public int depth(){
 		if (this.left == null && this.right == null){
 			return 1;
@@ -111,4 +112,6 @@ public class IntTreeNode {
 		}
 	}
 
+	
+	
 }
