@@ -62,4 +62,22 @@ public class IntTreeNode {
 		}
 	}
 	
+	public String toStringComplete(){
+		
+		String result = "["+this.value+" ";
+		
+		if (this.left == null){
+			result += "L[]";
+		}else{
+			result += "L["+this.left.toStringComplete()+"]";
+		}
+		
+		if (this.right == null){
+			result += "R[]";
+		}else{
+			result += "R["+this.right.toStringComplete()+"]";
+		}
+		
+		return result;
+	}
 }
