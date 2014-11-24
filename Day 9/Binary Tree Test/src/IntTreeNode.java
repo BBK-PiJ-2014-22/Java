@@ -46,6 +46,20 @@ public class IntTreeNode {
 		}
 	}
 	
+	public int getMax(){
+		if (this.right == null){
+			return this.value;
+		}else{
+			return this.right.getMax();
+		}
+	}
 	
+	public int getMin(){
+		if (this.left == null){
+			return this.value;
+		}else{
+			return this.left.getMin();
+		}
+	}
 	
 }
