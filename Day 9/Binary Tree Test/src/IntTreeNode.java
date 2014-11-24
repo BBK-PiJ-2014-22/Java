@@ -98,5 +98,17 @@ public class IntTreeNode {
 		return result;
 		
 	}
+	
+	public int depth(){
+		if (this.left == null && this.right == null){
+			return 1;
+		}else if (this.left == null){
+			return this.right.depth()+1;
+		}else if (this.right == null){
+			return this.left.depth()+1;
+		}else{
+			return Integer.max(this.right.depth(), this.left.depth())+1;
+		}
+	}
 
 }

@@ -24,6 +24,7 @@ public class IntTreeNodeTest {
 		System.out.println("Min: "+tree.getMin());
 		System.out.println(tree.toStringComplete());
 		System.out.println(tree);
+		System.out.println(tree.depth());
 	}
 
 	public static String stringArray(int[] array){
