@@ -23,6 +23,7 @@ public class IntTreeNodeTest {
 		System.out.println("Max: "+tree.getMax());
 		System.out.println("Min: "+tree.getMin());
 		System.out.println(tree.toStringComplete());
+		System.out.println(tree);
 	}
 
 	public static String stringArray(int[] array){
