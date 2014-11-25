@@ -118,31 +118,46 @@ public class IntTreeNode {
 
 	public boolean remove(int number){
 		
-		if (this.value == number){
-			if (this.right != null){
-				this.value = this.right.getMin();
-				
-				if (this.right.left == null){
-					this.right = this.right.right;
+		IntTreeNode branch;
+		
+		if (number > this.value && this.right != null){
+			branch = this.right;
+		}else if(this.value < number && this.left != null){
+			branch = this.left;
+		}else {
+			branch = this;
+		}
+	
+		if (branch.value == number){
+			if (branch.left != null){
+				branch.value = branch.left.getMax();
+				return branch.left.remove(branch.value);
+			}else if (branch.right != null){
+				branch.value = branch.right.getMin();
+				return branch.right.remove(branch.value);
+			}else{
+				if (branch.value <= this.value){
+					this.left = null;
+					return true;
+				}else{
+					this.right = null;
 					return true;
 				}
-				
-				
-				
-				
-	
-				return this.right.remove(this.right.getMin());
-			}else if (this.left != null){
-				this.value = this.left.getMax();
-				return this.left.remove(this.left.getMax());
-			}else{
-				
 			}
-		} 
-				
-		//if not number remove number left or right depending on which side it will be
-		
-		return false;
+		}else if (number > branch.value ){
+			if (branch.right == null){
+				return false;				
+			}
+			else {
+				return branch.right.remove(number);
+			}
+			
+		}else{
+			if (branch.left == null){
+				return false;
+			}else{
+				return branch.left.remove(number);
+			}
+		}
 	}
-	
 }

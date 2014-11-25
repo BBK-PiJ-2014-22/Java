@@ -5,7 +5,8 @@ public class IntTreeNodeTest {
 
 	public static void main(String[] args) {
 				
-		IntTreeNode tree = new IntTreeNode(5);
+		IntTree tree = new IntTree();
+		
 		Random generator = new Random();
 		
 		int[] array = new int[5];
@@ -24,7 +25,7 @@ public class IntTreeNodeTest {
 		System.out.println("Min: "+tree.getMin());
 		System.out.println(tree.toStringComplete());
 		System.out.println(tree);
-		System.out.println(tree.depth()); // THis needs a better test
+		System.out.println(tree.depth()); 
 	}
 
 	public static String stringArray(int[] array){
