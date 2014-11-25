@@ -130,21 +130,27 @@ public class IntTreeNode {
 		}
 	
 		if (branch.value == number){
-			if (branch.left != null){
+			
+			if (branch.left == null & branch.right == null){
+				if (branch.value > this.value){
+					this.right = null;
+				}else{
+					this.left = null;
+				}
+			}else if (branch.left != null){		
 				branch.value = branch.left.getMax();
-				return branch.left.remove(branch.value);
+			    branch.left.remove(branch.value);
 			}else if (branch.right != null){
 				branch.value = branch.right.getMin();
-				return branch.right.remove(branch.value);
-			}else{
-				if (branch.value <= this.value){
-					this.left = null;
-					return true;
-				}else{
-					this.right = null;
-					return true;
-				}
+				branch.right.remove(branch.value);
+			}else if (branch.value <= this.value){
+					this.left = branch.left;
+			}else if (branch.value > this.value){
+					this.right = branch.right;
 			}
+			
+			return true;
+			
 		}else if (number > branch.value ){
 			if (branch.right == null){
 				return false;				
