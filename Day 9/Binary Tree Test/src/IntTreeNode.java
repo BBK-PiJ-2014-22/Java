@@ -5,6 +5,12 @@ public class IntTreeNode {
 	public IntTreeNode left;
 	public IntTreeNode right;
 	
+	
+	public IntTreeNode(){
+		this.left = null;
+		this.right = null;
+	}
+	
 	public IntTreeNode(int value){
 		this.value = value;
 		this.left = null;
@@ -98,8 +104,6 @@ public class IntTreeNode {
 		return result;
 		
 	}
-	
-	//This needs further testing
 	public int depth(){
 		if (this.left == null && this.right == null){
 			return 1;
@@ -112,6 +116,33 @@ public class IntTreeNode {
 		}
 	}
 
+	public boolean remove(int number){
+		
+		if (this.value == number){
+			if (this.right != null){
+				this.value = this.right.getMin();
+				
+				if (this.right.left == null){
+					this.right = this.right.right;
+					return true;
+				}
+				
+				
+				
+				
 	
+				return this.right.remove(this.right.getMin());
+			}else if (this.left != null){
+				this.value = this.left.getMax();
+				return this.left.remove(this.left.getMax());
+			}else{
+				
+			}
+		} 
+				
+		//if not number remove number left or right depending on which side it will be
+		
+		return false;
+	}
 	
 }
