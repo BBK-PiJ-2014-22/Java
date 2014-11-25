@@ -68,20 +68,21 @@ public class IntTreeNode {
 		}
 	}
 	
-	public String toStringComplete(){
+	@Override
+	public String toString(){
 		
 		String result = "["+this.value+" ";
 		
 		if (this.left == null){
 			result += "L[]";
 		}else{
-			result += "L["+this.left.toStringComplete();
+			result += "L["+this.left.toString();
 		}
 		
 		if (this.right == null){
 			result += "R[]";
 		}else{
-			result += "R["+this.right.toStringComplete();
+			result += "R["+this.right.toString();
 		}
 		
 		result += "]";
@@ -89,15 +90,15 @@ public class IntTreeNode {
 		return result;
 	}
 
-	@Override
-	public String toString(){
+
+	public String toStringSimple(){
 		String result = "["+this.value;
 		
 		if (this.left != null){
-			result += this.left.toString();
+			result += this.left.toStringSimple();
 		}
 		if (this.right != null){
-			result += this.right.toString();
+			result += this.right.toStringSimple();
 		}
 		
 		result += "]";

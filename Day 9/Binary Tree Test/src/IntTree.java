@@ -1,7 +1,7 @@
 
 public class IntTree {
 
-	private IntTreeNode head;
+	public IntTreeNode head;
 	
 	public void add(int value){
 		if (head == null){
@@ -26,6 +26,7 @@ public class IntTree {
 		else return head.getMax();
 	}
 	
+
 	public boolean remove(int number){
 		if (head == null){
 			return false;
@@ -42,9 +43,9 @@ public class IntTree {
 		else return head.toString();
 	}
 
-	public String toStringComplete(){
+	public String toStringSimple(){
 		if (head == null) return "null";
-		else return head.toStringComplete();
+		else return head.toStringSimple();
 	}
 
 	

@@ -5,16 +5,11 @@ public class IntTreeNodeTest {
 
 	public static void main(String[] args) {
 				
-	for (int i = 0; i < 10 ; i++){
 		randomTreeTestGen();
-		System.out.println();
-		System.out.println("********");
-		System.out.println();
 
 	}
 	
-	
-	}
+
 	
 	public static void randomTreeTestGen(){
 	
@@ -41,27 +36,23 @@ public class IntTreeNodeTest {
 		System.out.println(tree.depth());
 */
 		
-		tree.add(array[3]);
-		tree.add(array[3]);
-		System.out.println(tree);
-		System.out.println();
-		System.out.println("Removing "+ array[3]);
-		tree.remove(array[3]);
-		System.out.println(tree);
-		System.out.println();
-		System.out.println("Removing "+ array[0]);
-		tree.remove(array[0]);
-		System.out.println(tree);
-		System.out.println();
-		System.out.println("Removing 101");
-		tree.remove(101);
-		System.out.println(tree);
-		
-		
-	
-	
+/*		tree.add(array[3]);
+		tree.add(array[3]);*/
+		testRemove(tree, array[3]);
+		testRemove(tree, array[0]);
+		testRemove(tree, tree.getMin());
 	}
 
+	public static void testRemove(IntTree tree , int number){
+		System.out.println(tree);
+		System.out.println("Removing "+ number);
+		System.out.println(tree.remove(number));
+		System.out.println(tree);
+		System.out.println();
+
+	}
+	
+	
 	public static String stringArray(int[] array){
 		String result = "[";
 		for (int i = 0; i < array.length ; i++){
