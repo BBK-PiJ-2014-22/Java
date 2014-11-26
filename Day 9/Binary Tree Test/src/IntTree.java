@@ -30,11 +30,23 @@ public class IntTree {
 	public boolean remove(int number){
 		if (head == null){
 			return false;
-		}else if (head.value == number && head.left == null && head.right == null){
-			head = null;
+			
+		}else if (head.value == number){
+		
+			if(head.left == null && head.right == null){
+				head = null;
+			}else if (head.right != null){
+				head.value = head.right.getMin();
+				head.xremove(head.value);
+			}else if (head.left != null){
+				head.value = head.left.getMax();
+				head.xremove(head.value);
+			}else{
+				System.out.println("Error in IntTree checker");
+			}
 			return true;
 		}else{
-			return head.remove(number);
+			return head.xremove(number);
 		}	
 	}
 

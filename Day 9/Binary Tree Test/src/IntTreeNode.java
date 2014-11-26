@@ -121,12 +121,57 @@ public class IntTreeNode {
 		
 		IntTreeNode branch;
 		
-		if (number > this.value && this.right != null){
-			branch = this.right;
-		}else if(this.value < number && this.left != null){
-			branch = this.left;
-		}else {
-			branch = this;
+		if (number > this.value){
+			if (this.right == null){
+				return false;
+			}else{
+				branch = this.right;
+			}
+		}else{
+			if (this.left == null){
+				return false;
+			}else{
+				branch = this.left;
+			}
+		}
+		
+		if (branch.value != number){
+			return branch.remove(number);
+		}else{
+			if (branch.left == null && branch.right == null){
+				if (number > this.value){
+					this.right = null;
+					return true;
+				}else{
+					this.left = null;
+					return true;
+				}
+			}else if (branch.right != null){
+				branch.value = branch.right.getMin();
+				return branch.remove(branch.value);
+			}else{
+				branch.value = branch.left.getMax();
+				return branch.remove(branch.value);
+			}
+		}	
+	}
+	
+	public boolean xremove(int number){
+		
+		IntTreeNode branch = null;
+		
+		if (number > this.value){
+			if (this.right != null){
+				branch = this.right;
+			}else{
+				return false;
+			}
+		}else if (number <= this.value) {
+			if (this.left != null){
+				branch = this.left;
+			}else{
+				return false;
+			}
 		}
 	
 		if (branch.value == number){
@@ -137,34 +182,35 @@ public class IntTreeNode {
 				}else{
 					this.left = null;
 				}
-			}else if (branch.left != null){		
-				branch.value = branch.left.getMax();
-			    branch.left.remove(branch.value);
-			}else if (branch.right != null){
+			}else if (branch.left != null && branch.right != null){
 				branch.value = branch.right.getMin();
-				branch.right.remove(branch.value);
-			}else if (branch.value <= this.value){
-					this.left = branch.left;
-			}else if (branch.value > this.value){
-					this.right = branch.right;
-			}
+				branch.xremove(branch.value);
 			
+			}else if (branch.right != null){		
+				branch.value = branch.right.getMin();
+				branch.xremove(branch.value);
+			
+			}else if (branch.left != null){
+				branch.value = branch.left.getMax();
+				branch.xremove(branch.value);
+			}
 			return true;
 			
-		}else if (number > branch.value ){
-			if (branch.right == null){
-				return false;				
-			}
-			else {
-				return branch.right.remove(number);
-			}
-			
 		}else{
-			if (branch.left == null){
-				return false;
+			
+			if (number > branch.value ){
+				if (branch.right == null){
+					return false;				
+				}else {
+					return branch.right.xremove(number);
+				}
 			}else{
-				return branch.left.remove(number);
+				if (branch.left == null){
+					return false;
+				}else{
+					return branch.left.xremove(number);
+				}
 			}
 		}
-	}
+	}	
 }
