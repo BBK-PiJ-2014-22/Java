@@ -1,13 +1,16 @@
 
 public class IntSetTree implements IntSet {
 
+	IntSetTreeNode head;
 	
-	
-	
+
+	public IntSetTree(){
+		head = null;
+	}
 	
 	@Override
 	public void add(int number) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
