@@ -40,15 +40,14 @@ public class IntTree {
 		
 			if(head.left == null && head.right == null){
 				head = null;
+			}else if (head.left != null && head.right != null){
+				IntTreeNode newHead = head.right.findSmallest();
+				newHead.left = head.left;
+				newHead.right = head.right;
+				head = newHead;
 			}else if (head.left != null){
-				head.value = head.left.getMax();
-				head.remove(head.value);
-			}else if (head.right != null){
-				head.value = head.right.getMin();
-				head.remove(head.value);
-
-			}else{
-				System.out.println("Error in IntTree checker");
+			
+			
 			}
 			return true;
 		}else{

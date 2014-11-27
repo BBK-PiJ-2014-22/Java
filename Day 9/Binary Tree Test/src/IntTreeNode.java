@@ -166,7 +166,26 @@ public class IntTreeNode {
 					this.left = null;
 					return true;
 				}
+			}else if (branch.left != null && branch.right != null){
+				IntTreeNode newBranch = branch.findSmallest();
+				newBranch.left = branch.left;
+				newBranch.right = branch.right;
+				if (this.right == branch){
+					this.right = newBranch;
+				}else{
+					this.left = newBranch;
+				}
+			return true;
 			}else if (branch.left != null){
+				this.left = branch.left;
+				return true;
+			}else{
+				this.right = branch.right;
+				return true;
+			}
+			
+				
+			/*}else if (branch.left != null){
 				System.out.println("3. Branch left is not null");//debug				
 				branch.value = branch.left.getMax();
 				System.out.println("4. Reassigning this.left to "+branch.value);//debug
@@ -176,8 +195,15 @@ public class IntTreeNode {
 				branch.value = branch.right.getMin();
 				System.out.println("4. Branch value set to "+branch.value);//debug
 				return branch.remove(branch.value);
-
-			}
+			}*/
 		}	
+	}
+	
+	public IntTreeNode findSmallest(){
+		if (this.left == null){
+			return this;
+		}else{
+			return this.left.findSmallest();
+		}
 	}
 }	

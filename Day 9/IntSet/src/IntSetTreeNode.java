@@ -51,7 +51,7 @@ public class IntSetTreeNode {
 	
 	public boolean containsVerbose(int number){
 	
-		System.out.println("Comparing v"+this.value+"to n"+number);
+		System.out.println("Comparing "+this.value+":"+number);
 	
 		if (this.value == number){
 			return true;
