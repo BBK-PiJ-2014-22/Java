@@ -121,96 +121,63 @@ public class IntTreeNode {
 		
 		IntTreeNode branch;
 		
+		System.out.println();
+		System.out.println("Testing node: "+this.value);//debug
+		System.out.println("Testing Number: "+number);//debug
+
+		
 		if (number > this.value){
+			System.out.println("1. Number > value");//debug
 			if (this.right == null){
+				System.out.println("2. Right is null, returning false");//debug
 				return false;
 			}else{
 				branch = this.right;
+				System.out.println("2. Assigning branch to right");//debug
+
 			}
 		}else{
+			System.out.println("1. Number <= value");//debug
 			if (this.left == null){
+				System.out.println("2. Left is null, returning false");//debug
 				return false;
 			}else{
 				branch = this.left;
+				System.out.println("2. Assigning branch to left");//debug
 			}
 		}
 		
 		if (branch.value != number){
+			System.out.println("3. Branch number not matched... moving on");//debug
+			System.out.println();//debug
+
 			return branch.remove(number);
+			
 		}else{
+			System.out.println("3. Branch Number matches");//debug
 			if (branch.left == null && branch.right == null){
+				System.out.println("Branch is leaf");//debug
 				if (number > this.value){
+					System.out.println("4. Reassigning this.right to "+branch.value);//debug
 					this.right = null;
 					return true;
 				}else{
+					System.out.println("4. Reassigning this.left to "+branch.value);//debug
 					this.left = null;
 					return true;
 				}
-			}else if (branch.right != null){
-				branch.value = branch.right.getMin();
+			}else if (branch.left != null){
+				System.out.println("3. Branch left is not null");//debug				
+				branch.value = branch.left.getMax();
+				System.out.println("4. Reassigning this.left to "+branch.value);//debug
 				return branch.remove(branch.value);
 			}else{
-				branch.value = branch.left.getMax();
+				System.out.println("3. Branch right is not null");//debug
+				branch.value = branch.right.getMin();
+				System.out.println("4. Branch value set to "+branch.value);//debug
 				return branch.remove(branch.value);
+
 			}
 		}	
 	}
-	
-	public boolean xremove(int number){
-		
-		IntTreeNode branch = null;
-		
-		if (number > this.value){
-			if (this.right != null){
-				branch = this.right;
-			}else{
-				return false;
-			}
-		}else if (number <= this.value) {
-			if (this.left != null){
-				branch = this.left;
-			}else{
-				return false;
-			}
-		}
-	
-		if (branch.value == number){
-			
-			if (branch.left == null & branch.right == null){
-				if (branch.value > this.value){
-					this.right = null;
-				}else{
-					this.left = null;
-				}
-			}else if (branch.left != null && branch.right != null){
-				branch.value = branch.right.getMin();
-				branch.xremove(branch.value);
-			
-			}else if (branch.right != null){		
-				branch.value = branch.right.getMin();
-				branch.xremove(branch.value);
-			
-			}else if (branch.left != null){
-				branch.value = branch.left.getMax();
-				branch.xremove(branch.value);
-			}
-			return true;
-			
-		}else{
-			
-			if (number > branch.value ){
-				if (branch.right == null){
-					return false;				
-				}else {
-					return branch.right.xremove(number);
-				}
-			}else{
-				if (branch.left == null){
-					return false;
-				}else{
-					return branch.left.xremove(number);
-				}
-			}
-		}
-	}	
-}
+}	

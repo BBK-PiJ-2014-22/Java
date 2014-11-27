@@ -26,6 +26,11 @@ public class IntTree {
 		else return head.getMax();
 	}
 	
+	public int getMin(){
+		if (head == null) return 0;
+		else return head.getMin();
+	}
+	
 
 	public boolean remove(int number){
 		if (head == null){
@@ -37,16 +42,16 @@ public class IntTree {
 				head = null;
 			}else if (head.right != null){
 				head.value = head.right.getMin();
-				head.xremove(head.value);
+				head.remove(head.value);
 			}else if (head.left != null){
 				head.value = head.left.getMax();
-				head.xremove(head.value);
+				head.remove(head.value);
 			}else{
 				System.out.println("Error in IntTree checker");
 			}
 			return true;
 		}else{
-			return head.xremove(number);
+			return head.remove(number);
 		}	
 	}
 
@@ -62,10 +67,7 @@ public class IntTree {
 
 	
 	
-	public int getMin(){
-		if (head == null) return 0;
-		else return head.getMin();
-	}
+
 
 
 
