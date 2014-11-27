@@ -158,11 +158,11 @@ public class IntTreeNode {
 			if (branch.left == null && branch.right == null){
 				System.out.println("Branch is leaf");//debug
 				if (number > this.value){
-					System.out.println("4. Reassigning this.right to "+branch.value);//debug
+					System.out.println("4. Reassigning this.right to null");//debug
 					this.right = null;
 					return true;
 				}else{
-					System.out.println("4. Reassigning this.left to "+branch.value);//debug
+					System.out.println("4. Reassigning this.left to null");//debug
 					this.left = null;
 					return true;
 				}
