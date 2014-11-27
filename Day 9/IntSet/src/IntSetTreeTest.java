@@ -2,14 +2,21 @@
 public class IntSetTreeTest {
 
 	public static void main(String[] args) {
-		IntSetTreeNode head = new IntSetTreeNode(5);
+		IntSetTree tree = new IntSetTree();
 		
-		head.add(6);
-		head.add(7);
-		System.out.println("Contains 6: "+head.contains(6));
-		System.out.println("Contains 7: "+head.contains(7));
-		System.out.println("Contains 8: "+head.contains(8));
-		System.out.println(head);
+		tree.add(6);
+		tree.add(6);
+		tree.add(7);
+		tree.add(7);
+		tree.add(5);
+		tree.add(20);
+		tree.add(10);
+		tree.add(19);
+		tree.add(60);
+		System.out.println("Contains 6: "+tree.containsVerbose(6));
+		System.out.println("Contains 7: "+tree.containsVerbose(7));
+		System.out.println("Contains 19: "+tree.containsVerbose(19));
+		System.out.println(tree);
 	}
 
 }

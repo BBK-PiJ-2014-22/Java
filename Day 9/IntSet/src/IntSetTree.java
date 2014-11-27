@@ -10,24 +10,32 @@ public class IntSetTree implements IntSet {
 	
 	@Override
 	public void add(int number) {
-		
-
+		if (this.head == null){
+			this.head = new IntSetTreeNode(number);
+		}else{
+			head.add(number);
+		}
 	}
 
 	@Override
 	public boolean contains(int number) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.head == null) return false;
+		else return head.contains(number);
 	}
 
 	@Override
 	public boolean containsVerbose(int number) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.head == null){
+			System.out.println("No head assigned");
+			return false;
+		}else{
+			return head.containsVerbose(number);
+		}
 	}
 	
 	@Override
 	public String toString(){
-		return "";
+		if (this.head == null) return "null";
+		else return head.toString();
 	}
 }

@@ -49,6 +49,30 @@ public class IntSetTreeNode {
 		}
 	}
 	
+	public boolean containsVerbose(int number){
+	
+		System.out.println("Comparing v"+this.value+"to n"+number);
+	
+		if (this.value == number){
+			return true;
+		}else{
+			IntSetTreeNode branch;
+			if (number <= this.value){
+				branch = this.left;
+			}else{
+				branch = this.right;
+			}
+			if (branch == null){
+				return false;
+			}
+			else{
+				return branch.containsVerbose(number);
+			}
+		}
+	}
+	
+	
+	
 	public String toString(){
 		
 		String result = "["+this.value+" ";
@@ -65,6 +89,7 @@ public class IntSetTreeNode {
 		}
 		result += "]";
 		return result;
-	}
-	
+	}	
 }
+
+
