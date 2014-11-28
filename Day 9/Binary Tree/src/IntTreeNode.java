@@ -4,30 +4,38 @@ public class IntTreeNode {
 	public int value;
 	public IntTreeNode left;
 	public IntTreeNode right;
+	public IntTreeNode parent;
 	
 	
-	public IntTreeNode(){
-		this.left = null;
-		this.right = null;
-	}
 	
 	public IntTreeNode(int value){
 		this.value = value;
 		this.left = null;
 		this.right = null;
+		this.parent = null;
+	}
+
+	
+	public IntTreeNode(int value, IntTreeNode parent){
+		this.value = value;
+		this.left = null;
+		this.right = null;
+		this.parent = parent;
 	}
 	
 	
+	
 	public void add(int newNumber){
-		if (newNumber > this.value){
+
+		if(newNumber > this.value){
 			if (right == null){
-				this.right = new IntTreeNode(newNumber);
+				this.right = new IntTreeNode(newNumber, this);
 			}else{
 				this.right.add(newNumber);
 			}
 		}else{
 			if (left == null){
-				this.left = new IntTreeNode(newNumber);
+				this.left = new IntTreeNode(newNumber,this);
 			}else{
 				this.left.add(newNumber);
 			}
@@ -119,6 +127,57 @@ public class IntTreeNode {
 
 	public boolean remove(int number){
 		
+		//not number
+		if (this.value != number){
+			if (number > value){ 
+				if (this.right == null) 
+					return false;
+				else 
+					return this.right.remove(number);
+			}else{ 
+				if (this.left == null) 
+					return false;
+				else 
+					return this.left.remove(number);
+			}
+		}else{ 
+			if (this.left == null && this.right == null){
+				if (this.value > parent.value){
+					parent.right = null;
+				}else{
+					parent.left = null;
+				}
+			}else if (this.right == null && this.left != null){
+				if (this.value > parent.value){
+					parent.right = this.left;
+				}else{
+					parent.left = this.left;
+				}
+			}else if (this.right != null && this.left == null){
+				if (this.value > parent.value){
+					parent.right = this.right;
+				}else{
+					parent.left = this.right;
+				}
+			}else{
+				IntTreeNode delete = this;
+				IntTreeNode newNode = this.right.findSmallest();
+				newNode.parent.left = null;
+				newNode.left = delete.left;
+				newNode.right = delete.right;
+				newNode.parent = delete.parent;
+				delete.parent = null;
+				delete.left = null;
+				delete.right = null;
+			}
+			return true;
+		}
+		
+	}
+	
+	
+/*	public boolean remove(int number){
+		
 		IntTreeNode branch;
 		
 		System.out.println();
@@ -185,7 +244,7 @@ public class IntTreeNode {
 			}
 			
 				
-			/*}else if (branch.left != null){
+			}else if (branch.left != null){
 				System.out.println("3. Branch left is not null");//debug				
 				branch.value = branch.left.getMax();
 				System.out.println("4. Reassigning this.left to "+branch.value);//debug
@@ -195,10 +254,10 @@ public class IntTreeNode {
 				branch.value = branch.right.getMin();
 				System.out.println("4. Branch value set to "+branch.value);//debug
 				return branch.remove(branch.value);
-			}*/
+			}
 		}	
 	}
-	
+*/	
 	public IntTreeNode findSmallest(){
 		if (this.left == null){
 			return this;
