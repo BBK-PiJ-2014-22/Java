@@ -53,9 +53,9 @@ public class IntTree {
 		else return head.toString();
 	}
 
-	public String toStringSimple(){
+	public String toStringComplex(){
 		if (head == null) return "null";
-		else return head.toStringSimple();
+		else return head.toString();
 	}
 
 	

@@ -76,7 +76,7 @@ public class IntTreeNode {
 		}
 	}
 	
-	@Override
+	
 	public String toString(){
 		
 		String result = "["+this.value+" ";

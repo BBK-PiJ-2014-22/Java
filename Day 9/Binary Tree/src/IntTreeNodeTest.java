@@ -17,9 +17,9 @@ public class IntTreeNodeTest {
 		
 		Random generator = new Random();
 		
-		int[] array = new int[5];
+		int[] array = new int[20];
 		
-		for (int i = 0; i < 5 ; i++){
+		for (int i = 0; i < 20 ; i++){
 			array[i] = generator.nextInt(100);
 			tree.add(array[i]);
 		}
@@ -40,7 +40,8 @@ public class IntTreeNodeTest {
 		tree.add(array[3]);*/
 		testRemove(tree, array[3]);
 		testRemove(tree, array[0]);
-		testRemove(tree, tree.getMin());
+		testRemove(tree, 101);
+		//testRemove(tree, tree.getMin());
 	}
 
 	public static void testRemove(IntTree tree , int number){
