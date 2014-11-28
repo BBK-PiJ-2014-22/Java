@@ -36,19 +36,12 @@ public class IntTree {
 		if (head == null){
 			return false;
 			
-		}else if (head.value == number){
-		
-			if(head.left == null && head.right == null){
-				head = null;
-			}else if (head.left != null && head.right != null){
-				IntTreeNode newHead = head.right.findSmallest();
-				newHead.left = head.left;
-				newHead.right = head.right;
-				head = newHead;
-			}else if (head.left != null){
-			
-			
-			}
+		}else if (head.value == number && 
+				  head.left != null    && 
+				  head.right != null){
+				IntTreeNode delete = head.right.findSmallest();
+				head.remove(number);
+				head = delete;
 			return true;
 		}else{
 			return head.remove(number);
