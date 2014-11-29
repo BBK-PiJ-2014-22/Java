@@ -160,18 +160,20 @@ public class IntTreeNode {
 					parent.left = this.right;
 				}
 			}else{
-				IntTreeNode delete = this;							System.out.println("Delete=" +delete);//debug
-				IntTreeNode newNode = this.right.findSmallest();	System.out.println("newNode =" +newNode);//debug
+				IntTreeNode delete = this;							
+				IntTreeNode newNode = this.right.findSmallest();	
 				
 				if (delete.value > delete.parent.value){
-					delete.parent.right = newNode;					System.out.println(delete.parent.value +" right set to "+newNode.value);//debug
+					delete.parent.right = newNode;					
 				}else {
-					delete.parent.left = newNode;					System.out.println(delete.parent.value +" left set to "+newNode.value);//debug
+					delete.parent.left = newNode;					
 				}
 				
-				newNode.parent.left = null; 						System.out.println(newNode.parent.value + " left set to null");//debug
-				newNode.left = delete.left;							System.out.println(newNode.value +" left set to " + newNode.left);//debug
-				newNode.parent = delete.parent;						System.out.println(newNode.value +"parent set to " + newNode.parent.value);//debug
+				if (newNode.parent != delete){
+					newNode.parent.left = null; 					
+				}
+				newNode.left = delete.left;							
+				newNode.parent = delete.parent;						
 
 				
 				if (newNode.left != null) newNode.left.parent = newNode;
@@ -185,100 +187,18 @@ public class IntTreeNode {
 						largest.right.parent = largest;
 					}
 				}
-				
-				
+								
 				delete.parent = null;
 				delete.left = null;
 				delete.right = null;
 			}
+
 			return true;
 		}
 		
 	}
 	
 	
-/*	public boolean remove(int number){
-		
-		IntTreeNode branch;
-		
-		System.out.println();
-		System.out.println("Testing node: "+this.value);//debug
-		System.out.println("Testing Number: "+number);//debug
-
-		
-		if (number > this.value){
-			System.out.println("1. Number > value");//debug
-			if (this.right == null){
-				System.out.println("2. Right is null, returning false");//debug
-				return false;
-			}else{
-				branch = this.right;
-				System.out.println("2. Assigning branch to right");//debug
-
-			}
-		}else{
-			System.out.println("1. Number <= value");//debug
-			if (this.left == null){
-				System.out.println("2. Left is null, returning false");//debug
-				return false;
-			}else{
-				branch = this.left;
-				System.out.println("2. Assigning branch to left");//debug
-			}
-		}
-		
-		if (branch.value != number){
-			System.out.println("3. Branch number not matched... moving on");//debug
-			System.out.println();//debug
-
-			return branch.remove(number);
-			
-		}else{
-			System.out.println("3. Branch Number matches");//debug
-			if (branch.left == null && branch.right == null){
-				System.out.println("Branch is leaf");//debug
-				if (number > this.value){
-					System.out.println("4. Reassigning this.right to null");//debug
-					this.right = null;
-					return true;
-				}else{
-					System.out.println("4. Reassigning this.left to null");//debug
-					this.left = null;
-					return true;
-				}
-			}else if (branch.left != null && branch.right != null){
-				IntTreeNode newBranch = branch.findSmallest();
-				newBranch.left = branch.left;
-				newBranch.right = branch.right;
-				if (this.right == branch){
-					this.right = newBranch;
-				}else{
-					this.left = newBranch;
-				}
-			return true;
-			}else if (branch.left != null){
-				this.left = branch.left;
-				return true;
-			}else{
-				this.right = branch.right;
-				return true;
-			}
-			
-				
-			}else if (branch.left != null){
-				System.out.println("3. Branch left is not null");//debug				
-				branch.value = branch.left.getMax();
-				System.out.println("4. Reassigning this.left to "+branch.value);//debug
-				return branch.remove(branch.value);
-			}else{
-				System.out.println("3. Branch right is not null");//debug
-				branch.value = branch.right.getMin();
-				System.out.println("4. Branch value set to "+branch.value);//debug
-				return branch.remove(branch.value);
-			}
-		}	
-	}
-*/	
 	public IntTreeNode findSmallest(){
 		if (this.left == null){
 			return this;
@@ -293,7 +213,5 @@ public class IntTreeNode {
 		}else{
 			return this.right.findSmallest();
 		}
-	}
-	
-	
+	}	
 }	

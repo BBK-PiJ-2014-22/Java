@@ -42,6 +42,7 @@ public class IntTree {
 				head = null;
 			}else if (head.left != null && head.right != null){
 				IntTreeNode newHead = head.right.findSmallest();
+				head.parent = new IntTreeNode(head.value-1);
 				head.remove(number);
 				head = newHead;
 			}else if (head.right != null){

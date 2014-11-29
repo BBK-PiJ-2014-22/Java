@@ -17,17 +17,24 @@ public class IntTreeNodeTest {
 		
 		Random generator = new Random();
 		
-		int[] array = new int[7];
-		array[0] = 4;
+		int[] array = new int[20];
+		/*array[0] = 4;
 		array[1] = 3;
-		array[2] = 10;
-		array[3] = 8;
-		array[4] = 7;
-		array[5] = 9;
-		array[6] = 12;
+		array[2] = 13;
+		array[3] = 14;
+		array[4] = 8;
+		array[5] = 7;
+		array[6] = 11;
+		array[7] = 9;
+		array[8] = 10;
+		array[9] = 12;*/
+	
 		
-		for (int i = 0; i < 7 ; i++){
-			//array[i] = generator.nextInt(100);
+		
+				
+		
+		for (int i = 0; i < 20 ; i++){
+			array[i] = generator.nextInt(100);
 			tree.add(array[i]);
 		}
 		
@@ -46,11 +53,11 @@ public class IntTreeNodeTest {
 		System.out.println(tree);
 		System.out.println(tree.depth());
 */
-		
-/*		tree.add(array[3]);
-		tree.add(array[3]);*/
 		testRemove(tree, 8);
-		//testRemove(tree, tree.getMin());
+		testRemove(tree, tree.getMin());
+		testRemove(tree, tree.getMax());
+		testRemove(tree, array[0]);
+		testRemove(tree, array[15]);
 	}
 
 	public static void testRemove(IntTree tree , int number){
