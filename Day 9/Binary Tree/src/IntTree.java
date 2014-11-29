@@ -1,4 +1,5 @@
 
+
 public class IntTree {
 
 	public IntTreeNode head;
@@ -36,12 +37,20 @@ public class IntTree {
 		if (head == null){
 			return false;
 			
-		}else if (head.value == number && 
-				  head.left != null    && 
-				  head.right != null){
-				IntTreeNode delete = head.right.findSmallest();
+		}else if (head.value == number){
+			if (head.left == null && head.right == null){
+				head = null;
+			}else if (head.left != null && head.right != null){
+				IntTreeNode newHead = head.right.findSmallest();
 				head.remove(number);
-				head = delete;
+				head = newHead;
+			}else if (head.right != null){
+				head = head.right;
+				head.parent = null;
+			}else{
+				head = head.left;
+				head.parent = null;
+			}
 			return true;
 		}else{
 			return head.remove(number);

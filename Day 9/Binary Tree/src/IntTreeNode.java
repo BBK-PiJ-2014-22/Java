@@ -160,12 +160,33 @@ public class IntTreeNode {
 					parent.left = this.right;
 				}
 			}else{
-				IntTreeNode delete = this;
-				IntTreeNode newNode = this.right.findSmallest();
-				newNode.parent.left = null;
-				newNode.left = delete.left;
-				newNode.right = delete.right;
-				newNode.parent = delete.parent;
+				IntTreeNode delete = this;							System.out.println("Delete=" +delete);//debug
+				IntTreeNode newNode = this.right.findSmallest();	System.out.println("newNode =" +newNode);//debug
+				
+				if (delete.value > delete.parent.value){
+					delete.parent.right = newNode;					System.out.println(delete.parent.value +" right set to "+newNode.value);//debug
+				}else {
+					delete.parent.left = newNode;					System.out.println(delete.parent.value +" left set to "+newNode.value);//debug
+				}
+				
+				newNode.parent.left = null; 						System.out.println(newNode.parent.value + " left set to null");//debug
+				newNode.left = delete.left;							System.out.println(newNode.value +" left set to " + newNode.left);//debug
+				newNode.parent = delete.parent;						System.out.println(newNode.value +"parent set to " + newNode.parent.value);//debug
+
+				
+				if (newNode.left != null) newNode.left.parent = newNode;
+				
+				if (!(delete.right == newNode)){
+					if (newNode.right == null){
+						newNode.right = delete.right;
+					}else{
+						IntTreeNode largest = newNode.findLargest();
+						largest.right = delete.right;
+						largest.right.parent = largest;
+					}
+				}
+				
+				
 				delete.parent = null;
 				delete.left = null;
 				delete.right = null;
@@ -265,4 +286,14 @@ public class IntTreeNode {
 			return this.left.findSmallest();
 		}
 	}
+	
+	public IntTreeNode findLargest(){
+		if (this.right == null){
+			return this;
+		}else{
+			return this.right.findSmallest();
+		}
+	}
+	
+	
 }	
