@@ -10,5 +10,9 @@ public class MobilePhone extends OldPhone {
 		dialled.add(number);
 	}
 	
+	public String displayDialled(){
+		return dialled.toString();
+	}
+	
 	
 }
