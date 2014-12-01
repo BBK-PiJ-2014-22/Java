@@ -8,7 +8,7 @@ public class PhoneLauncher {
 	}
 	
 	public void launch(){
-		SmartPhone phone = new SmartPhone();
+		SmartPhone phone = new SmartPhone("Fairphone");
 
 		phone.call("01234 567899");
 		phone.call("01234 567898");

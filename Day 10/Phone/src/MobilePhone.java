@@ -2,6 +2,13 @@ import calllist.*;
 
 public class MobilePhone extends OldPhone {
 
+	private String brand = null;
+	
+	public MobilePhone(String brand) {
+		super(brand);
+	}
+	
+	
 	private String ringAlarm = "Ring Ring";
 	public CallList dialled = new CallListImpl();
 	
