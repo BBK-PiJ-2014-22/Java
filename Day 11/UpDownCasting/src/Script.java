@@ -7,10 +7,11 @@ public class Script {
 	}
 
 	public void launch(){
-		SmartPhone smart = new SmartPhone("Fairphone");
+		MobilePhone mobile = new SmartPhone("Fairphone");
+		SmartPhone smart = (SmartPhone) mobile;
 		
 			System.out.println("Smart functions:");
-			smart.call("0123456789");
+
 			smart.call("00123456789");
 			smart.browseWeb("www.google.com");
 			smart.findPosition("Here");
@@ -22,6 +23,7 @@ public class Script {
 			
 			System.out.println("Old functions:");
 			System.out.println(smart.getBrand());	
+			smart.call("0123456789");
 		
 		
 	}
