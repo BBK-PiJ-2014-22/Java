@@ -34,14 +34,14 @@ public class UserTest {
 	
 	@Test
 	public void GetRealLibrary(){
-		user.registerLibrary(new Library());
+		user.registerLibrary(new Library("Stupid"));
 		assertEquals("Stupid", user.getLibrary());
 	}
 	
 	@Test
 	public void GetRealID(){
-		user.registerLibrary(new Library());
-		assertEquals(2, user.getLibraryID());
+		user.registerLibrary(new Library("Stupid"));
+		assertEquals(1, user.getLibraryID());
 	}
 	
 }
