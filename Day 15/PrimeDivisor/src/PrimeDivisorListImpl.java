@@ -14,9 +14,7 @@ public class PrimeDivisorListImpl implements PrimeDivisorList {
 	@Override
 	public void add(Integer prime) {
 
-		if (prime == null){
-			throw new NullPointerException();
-		}else if (!isPrime(prime)){
+		if (!isPrime(prime)){
 			throw new IllegalArgumentException();
 		}else{
 			list.add(prime);
