@@ -8,14 +8,17 @@ public class Increaser implements Runnable {
 		for (int i = 0; i < 100; i++) {
 			Increaser increaserTask = new Increaser(counter);
 			Thread t = new Thread(increaserTask);
-			t.start();
+				t.start();
 		}
 	}
 	
 	public void run() {
 		System.out.println("Starting at " + c.getCount());
 		for (int i = 0; i < 1000; i++) {
-			c.increase();
+				synchronized(c){
+					c.increase();
+				}
+		
 		}
 		System.out.println("Stopping at " + c.getCount());
 	}

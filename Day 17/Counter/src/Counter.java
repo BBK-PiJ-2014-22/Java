@@ -1,7 +1,7 @@
 public class Counter {
 	private int n = 0;
 	
-	public synchronized void increase() {
+	public void increase(){
 			n++;
 	}
 	
