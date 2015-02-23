@@ -27,7 +27,7 @@ public class ThreadManager implements Runnable{
 				t.start();
 			}else{
 				try{
-					wait(1000);
+					wait(1);
 					for (int i = activeThreads.size()-1 ; i >= 0 ; i--){
 						if (!activeThreads.get(i).isAlive()){
 							activeThreads.remove(i);

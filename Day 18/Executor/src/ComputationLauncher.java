@@ -13,7 +13,7 @@ public class ComputationLauncher {
      * difference.
      */
      public static final int COUNT = 40000000;
-     public static final int TESTCOUNT = 6;
+     public static final int TESTCOUNT = 8;
 
     /*
      * The computations to be performed. Stored as fields so 
