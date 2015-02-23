@@ -1,3 +1,5 @@
+import java.util.concurrent.Executor;
+
 /**
  * This class launched two heavy computations
  * sequentially first, then in parallel. 
@@ -48,43 +50,76 @@ public class ComputationLauncher {
 	  c1 = new Computation(createArray(COUNT/2));
 	  c2 = new Computation(createArray(COUNT/2));
 	  c3 = new Computation(createArray(COUNT/2));
-	  c4 = new Computation(createArray(COUNT/2));	
+	  c4 = new Computation(createArray(COUNT/2));
 	  start = System.currentTimeMillis();
+
+	  start = System.currentTimeMillis();
+	  executor(6);
+	  stop = System.currentTimeMillis();
+	  System.out.println("Time with executor (2): " + (stop - start) + "ms");
+	  
 	  sequentialComputations();
 	  stop = System.currentTimeMillis();
 	  System.out.println("Time without threads: " + (stop - start) + "ms");
+	 
 	  start = System.currentTimeMillis();
 	  parallelComputations();
 	  stop = System.currentTimeMillis();
 	  System.out.println("Time with threads: " + (stop - start) + "ms");
+	  
+	  start = System.currentTimeMillis();
+	  executor(4);
+	  stop = System.currentTimeMillis();
+	  System.out.println("Time with executor (4): " + (stop - start) + "ms");
+	  
+	  start = System.currentTimeMillis();
+	  executor(2);
+	  stop = System.currentTimeMillis();
+	  System.out.println("Time with executor (2): " + (stop - start) + "ms");
+	  
+
     }
-   
+        
+    private void executor(int threadLimit) {
+    	Executor e = new ExecutorImpl(threadLimit);
+    	e.execute(c1);
+    	e.execute(c2);
+    	e.execute(c3);
+    	e.execute(c4); 	
+    	
+  	    double result1 = c1.getResult();
+  	    double result2 = c2.getResult();
+  	    double result3 = c3.getResult();
+    	double result4 = c4.getResult();
+    	System.out.println("Result: " + (result1 + result2 + result3 + result4));
+  	
+     }
+    
     private void sequentialComputations() {
-	  c1.run();
-	  c2.run();
-	  c3.run();
-	  c4.run();
-	  double result1 = c1.getResult();
-	  double result2 = c2.getResult();
-	  double result3 = c3.getResult();
-	  double result4 = c4.getResult();
-	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
-    }
-   
-    private void parallelComputations() {
-	  Thread t1 = new Thread(c1);
-	  t1.start();
-	  Thread t2 = new Thread(c2);
-	  t2.start();
-	  Thread t3 = new Thread(c3);
-	  t3.start();
-	  Thread t4 = new Thread(c4);
-	  t4.start();
-	  double result1 = c1.getResult();
-	  double result2 = c2.getResult();
-	  double result3 = c3.getResult();
-	  double result4 = c4.getResult();
-	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
-    }
+  	  c1.run();
+  	  c2.run();
+  	  c3.run();
+  	  c4.run();
+  	  double result1 = c1.getResult();
+  	  double result2 = c2.getResult();
+  	  double result3 = c3.getResult();
+  	  double result4 = c4.getResult();
+  	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
+      }
      
+      private void parallelComputations() {
+  	  Thread t1 = new Thread(c1);
+  	  t1.start();
+  	  Thread t2 = new Thread(c2);
+  	  t2.start();
+  	  Thread t3 = new Thread(c3);
+  	  t3.start();
+  	  Thread t4 = new Thread(c4);
+  	  t4.start();
+  	  double result1 = c1.getResult();
+  	  double result2 = c2.getResult();
+  	  double result3 = c3.getResult();
+  	  double result4 = c4.getResult();
+  	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
+      }
 }
