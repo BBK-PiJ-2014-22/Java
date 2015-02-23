@@ -13,16 +13,16 @@ public class ComputationLauncher {
      * difference.
      */
      public static final int COUNT = 40000000;
+     public static final int TESTCOUNT = 6;
 
     /*
      * The computations to be performed. Stored as fields so 
      * both methods (sequential and parallel) act on exactly 
      * the same data
      */
-    private Computation c1 = null;
-    private Computation c2 = null;
-    private Computation c3 = null;
-    private Computation c4 = null;
+     
+    private Computation[] computations = new Computation[TESTCOUNT];
+   
 
     /**
      * The main method that launches the computations
@@ -47,25 +47,15 @@ public class ComputationLauncher {
 	  // Uncomment the following line to know how many processors your machine has
 	  // System.out.println("#CPU: " + Runtime.getRuntime().availableProcessors());
 	  long start, stop;
-	  c1 = new Computation(createArray(COUNT/2));
-	  c2 = new Computation(createArray(COUNT/2));
-	  c3 = new Computation(createArray(COUNT/2));
-	  c4 = new Computation(createArray(COUNT/2));
-	  start = System.currentTimeMillis();
+	  
+	  for (int i = 0; i < TESTCOUNT ; i++)
+		  computations[i] = new Computation(createArray(COUNT/2));
+
 
 	  start = System.currentTimeMillis();
 	  executor(6);
 	  stop = System.currentTimeMillis();
-	  System.out.println("Time with executor (2): " + (stop - start) + "ms");
-	  
-	  sequentialComputations();
-	  stop = System.currentTimeMillis();
-	  System.out.println("Time without threads: " + (stop - start) + "ms");
-	 
-	  start = System.currentTimeMillis();
-	  parallelComputations();
-	  stop = System.currentTimeMillis();
-	  System.out.println("Time with threads: " + (stop - start) + "ms");
+	  System.out.println("Time with executor (6): " + (stop - start) + "ms");
 	  
 	  start = System.currentTimeMillis();
 	  executor(4);
@@ -77,49 +67,53 @@ public class ComputationLauncher {
 	  stop = System.currentTimeMillis();
 	  System.out.println("Time with executor (2): " + (stop - start) + "ms");
 	  
+	  start = System.currentTimeMillis();
+	  parallelComputations();
+	  stop = System.currentTimeMillis();
+	  System.out.println("Time with threads: " + (stop - start) + "ms");
+  
+	  start = System.currentTimeMillis();
+	  sequentialComputations();
+	  stop = System.currentTimeMillis();
+	  System.out.println("Time without threads: " + (stop - start) + "ms");
 
     }
         
     private void executor(int threadLimit) {
     	Executor e = new ExecutorImpl(threadLimit);
-    	e.execute(c1);
-    	e.execute(c2);
-    	e.execute(c3);
-    	e.execute(c4); 	
     	
-  	    double result1 = c1.getResult();
-  	    double result2 = c2.getResult();
-  	    double result3 = c3.getResult();
-    	double result4 = c4.getResult();
-    	System.out.println("Result: " + (result1 + result2 + result3 + result4));
-  	
+    	for (int i = 0 ; i < TESTCOUNT ; i++)
+    		e.execute(computations[i]);
+    	
+    	double result = 0.0;  	
+    	for (int i = 0 ; i < TESTCOUNT ; i++)
+    		result += computations[i].getResult();		
+    	System.out.println("Result: " + (result));
      }
     
     private void sequentialComputations() {
-  	  c1.run();
-  	  c2.run();
-  	  c3.run();
-  	  c4.run();
-  	  double result1 = c1.getResult();
-  	  double result2 = c2.getResult();
-  	  double result3 = c3.getResult();
-  	  double result4 = c4.getResult();
-  	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
+    	double result = 0.0;
+    	
+    	for (int i = 0 ; i < TESTCOUNT ; i++)
+    		computations[i].run();
+    	
+    	
+    	for (int i = 0 ; i < TESTCOUNT ; i++)
+    		result += computations[i].getResult();
+    	System.out.println("Result: " + (result));
+    	
+    	
       }
      
       private void parallelComputations() {
-  	  Thread t1 = new Thread(c1);
-  	  t1.start();
-  	  Thread t2 = new Thread(c2);
-  	  t2.start();
-  	  Thread t3 = new Thread(c3);
-  	  t3.start();
-  	  Thread t4 = new Thread(c4);
-  	  t4.start();
-  	  double result1 = c1.getResult();
-  	  double result2 = c2.getResult();
-  	  double result3 = c3.getResult();
-  	  double result4 = c4.getResult();
-  	  System.out.println("Result: " + (result1 + result2 + result3 + result4));
-      }
+      	for (int i = 0 ; i < TESTCOUNT ; i++){
+    		Thread t = new Thread(computations[i]);
+    		t.start();
+      	}
+    	
+    	double result = 0.0;  	
+    	for (int i = 0 ; i < TESTCOUNT ; i++)
+    		result += computations[i].getResult();		
+    	System.out.println("Result: " + (result));
+     }
 }
