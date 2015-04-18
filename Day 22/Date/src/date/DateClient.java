@@ -12,12 +12,18 @@ public class DateClient {
 	DateFormat format;
 	
 	public DateClient(){
-		this.format = new SimpleDateFormat("YYYY/MM/DD HH:MM:SS");
+		this.format = new SimpleDateFormat("yyyy/MM/dd HH:mm:S");
 	}
 
 	public static void main(String[] args) {
 		DateClient client = new DateClient();
-		client.launch();
+		
+		String input = "";
+		while (input != "q"){
+			System.out.println("q to exit");
+			System.console().readLine();
+			client.launch();
+		}
 
 	}
 	
